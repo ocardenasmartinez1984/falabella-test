@@ -157,7 +157,8 @@ docker compose build
 # Levantar en segundo plano (usar siempre -d)
 docker compose up --build -d
 
-# Probar (espera a ver "Started CalculoufApplication" en los logs)
+# Probar (el arranque tarda ~10-15 s; espera a ver
+# "Started CalculoufApplication" en los logs antes de consultar)
 curl "http://localhost:1984/calculouf?ufs=3"
 # -> 122649   (valorUf * 3, sin decimales)
 
@@ -167,6 +168,12 @@ docker compose down
 
 > IMPORTANTE: usa siempre `-d`. Sin él, el contenedor queda atado a la terminal
 > y se detiene al cerrar la sesión.
+
+> El arranque tarda unos segundos (~10-15 s). Espera a ver la línea
+> `Started CalculoufApplication` en los logs (`docker compose logs -f`) antes de
+> consultar el endpoint. Si consultas antes, obtendrás
+> `curl: (56) Recv failure: Connection reset by peer`: no es un error, solo
+> significa que aún está iniciando. Reintenta cuando termine de arrancar.
 
 > Detalle completo (diagrama de secuencia, cobertura JaCoCo, solución de
 > problemas) en [`calculouf/README.md`](./calculouf/README.md).
