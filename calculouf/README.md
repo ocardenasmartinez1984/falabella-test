@@ -87,8 +87,23 @@ docker compose up --build -d
 > terminal o perder la sesion (SSH)**, produciendo el error
 > `curl: (56) Recv failure: Connection reset by peer`.
 
-El servicio queda disponible en `http://localhost:1984`. Una vez arriba, se
-prueba con:
+El servicio queda disponible en `http://localhost:1984`.
+
+> **ESPERE a que el servicio termine de arrancar antes de consultarlo.**
+> El arranque tarda unos segundos (~10-15 s). Debe esperar a ver la linea
+> `Started CalculoufApplication` en los logs antes de hacer la consulta:
+>
+> ```bash
+> docker compose logs -f
+> #  espere a ver: Started CalculoufApplication in X seconds
+> #  (salir del log con Ctrl+C NO detiene el servicio)
+> ```
+>
+> Si consulta el endpoint antes de que termine de iniciar, obtendra
+> `curl: (56) Recv failure: Connection reset by peer`. No es un error:
+> espere a que arranque y reintente.
+
+Una vez arriba, se prueba con:
 
 ```bash
 curl "http://localhost:1984/calculouf?ufs=3"

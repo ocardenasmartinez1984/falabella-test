@@ -25,4 +25,7 @@ COPY --from=build /app/target/calculouf-0.0.1-SNAPSHOT.jar app.jar
 COPY --from=build /app/target/site/jacoco /jacoco
 
 EXPOSE 1984
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Se fuerza IPv4 (-Djava.net.preferIPv4Stack=true): el bridge por defecto de
+# Docker no enruta IPv6, y el host externo (api.boostr.cl / Cloudflare) publica
+# registros AAAA que la JVM elegiria primero, provocando UnknownHostException.
+ENTRYPOINT ["java", "-Djava.net.preferIPv4Stack=true", "-jar", "app.jar"]
