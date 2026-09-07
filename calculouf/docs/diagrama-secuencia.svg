@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a1a1a">CalculoUF - Diagrama de secuencia</text>
+
+  <!-- Lifeline heads -->
+  <!-- Cliente -->
+  <rect x="40" y="60" width="120" height="40" rx="6" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="100" y="85" text-anchor="middle" font-size="14" fill="#0d47a1">Cliente</text>
+  <!-- Controller -->
+  <rect x="210" y="60" width="150" height="40" rx="6" fill="#e8f5e9" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="285" y="85" text-anchor="middle" font-size="13" fill="#1b5e20">CalculoUFController</text>
+  <!-- Service -->
+  <rect x="410" y="60" width="150" height="40" rx="6" fill="#fff3e0" stroke="#f57c00" stroke-width="1.5"/>
+  <text x="485" y="85" text-anchor="middle" font-size="13" fill="#e65100">CalculoUFService</text>
+  <!-- Data -->
+  <rect x="610" y="60" width="120" height="40" rx="6" fill="#f3e5f5" stroke="#8e24aa" stroke-width="1.5"/>
+  <text x="670" y="85" text-anchor="middle" font-size="13" fill="#4a148c">MonedaData</text>
+  <!-- API -->
+  <rect x="780" y="60" width="100" height="40" rx="6" fill="#eceff1" stroke="#546e7a" stroke-width="1.5"/>
+  <text x="830" y="85" text-anchor="middle" font-size="12" fill="#263238">api.boostr.cl</text>
+
+  <!-- Lifelines -->
+  <line x1="100" y1="100" x2="100" y2="520" stroke="#90a4ae" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="285" y1="100" x2="285" y2="520" stroke="#90a4ae" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="485" y1="100" x2="485" y2="520" stroke="#90a4ae" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="670" y1="100" x2="670" y2="520" stroke="#90a4ae" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="830" y1="100" x2="830" y2="520" stroke="#90a4ae" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- Arrow marker defs -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#37474f"/>
+    </marker>
+    <marker id="arrowOpen" markerWidth="12" markerHeight="12" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6" fill="none" stroke="#37474f" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <!-- 1. Cliente -> Controller (request) -->
+  <line x1="100" y1="140" x2="283" y2="140" stroke="#37474f" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="105" y="133" font-size="12" fill="#263238">GET /calculouf?ufs=N</text>
+
+  <!-- 2. Controller -> Service -->
+  <line x1="285" y1="180" x2="483" y2="180" stroke="#37474f" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="292" y="173" font-size="12" fill="#263238">calcular(N)</text>
+
+  <!-- 3. Service -> Data -->
+  <line x1="485" y1="220" x2="668" y2="220" stroke="#37474f" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="492" y="213" font-size="12" fill="#263238">getValorUf()</text>
+
+  <!-- 4. Data -> API -->
+  <line x1="670" y1="260" x2="828" y2="260" stroke="#37474f" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="620" y="253" font-size="12" fill="#263238">GET /indicators.json</text>
+
+  <!-- 5. API -> Data (return) -->
+  <line x1="830" y1="300" x2="672" y2="300" stroke="#607d8b" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arrowOpen)"/>
+  <text x="600" y="293" font-size="12" fill="#455a64">{ "uf": { "value": 40883 } }</text>
+
+  <!-- 6. Data -> Service (return) -->
+  <line x1="670" y1="340" x2="487" y2="340" stroke="#607d8b" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arrowOpen)"/>
+  <text x="497" y="333" font-size="12" fill="#455a64">valorUf (double)</text>
+
+  <!-- 7. Service self call (Math.round) -->
+  <path d="M485,380 h60 v22 h-58" fill="none" stroke="#37474f" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="550" y="392" font-size="12" fill="#263238">Math.round(valorUf * N)</text>
+
+  <!-- 8. Service -> Controller (return) -->
+  <line x1="485" y1="440" x2="287" y2="440" stroke="#607d8b" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arrowOpen)"/>
+  <text x="295" y="433" font-size="12" fill="#455a64">resultado (long)</text>
+
+  <!-- 9. Controller -> Cliente (response) -->
+  <line x1="285" y1="480" x2="102" y2="480" stroke="#607d8b" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arrowOpen)"/>
+  <text x="108" y="473" font-size="12" fill="#455a64">200 OK  resultado sin decimales</text>
+</svg>

@@ -1,0 +1,13 @@
+services:
+  calculouf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: calculouf:latest
+    container_name: calculouf
+    ports:
+      - "1984:1984"
+    environment:
+      # Se puede sobreescribir la URL del endpoint de indicadores si hiciera falta.
+      - URL_API=https://api.boostr.cl/economy/indicators.json
+    restart: unless-stopped
