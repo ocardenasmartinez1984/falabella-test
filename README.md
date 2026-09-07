@@ -24,6 +24,33 @@ Docker.
 
 ---
 
+## Empezar
+
+### Requisitos previos
+
+- **Git** para clonar el repositorio.
+- **Docker** con el plugin Docker Compose (recomendado: sirve para ambos proyectos).
+- Opcionalmente **Node.js 20+** si quieres correr el proyecto 1 sin Docker.
+
+### Clonar el repositorio
+
+```bash
+# Clonar vía HTTPS
+git clone https://github.com/ocardenasmartinez1984/falabella-test.git
+
+# O vía SSH
+git clone git@github.com:ocardenasmartinez1984/falabella-test.git
+
+# Entrar al directorio del proyecto
+cd falabella-test
+```
+
+Una vez dentro, sigue las instrucciones de cada aplicación en las secciones
+[1. suma-matriz-submatriz](#1-suma-matriz-submatriz-) y
+[2. calculouf](#2-calculouf-).
+
+---
+
 ## Contenido del repositorio
 
 ```
